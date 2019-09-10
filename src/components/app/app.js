@@ -1,13 +1,16 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
+import {HomePage, CartPage} from '../pages';
 import './app.css';
-import {withBSS} from "../hoc";
 
 
-const App = ({bookstoreService}) => {
-    console.log(bookstoreService.getBooks());
+const App = () => {
     return (
-        <div>Hello!!!</div>
+        <Switch>
+            <Route path="/" exact component={HomePage}/>
+            <Route path="/cart" component={CartPage}/>
+        </Switch>
     )
 };
 
-export default withBSS()(App);
+export default App;
