@@ -1,7 +1,7 @@
 import React from 'react';
 import './book-item.css';
 
-const BookItem = ({books}) => {
+const BookItem = ({books, bookAddedToCart}) => {
     const {title, author, price, imgSrc} = books;
     return (
         <div className="book-list-item">
@@ -12,7 +12,7 @@ const BookItem = ({books}) => {
                 <a href="/" className="book-title">{title}</a>
                 <div className="book-author">{author}</div>
                 <div className="book-price">${price}</div>
-                <button type="button" className="btn btn-info add-to-cart">Add to cart</button>
+                <button onClick={bookAddedToCart} type="button" className="btn btn-info add-to-cart">Add to cart</button>
             </div>
         </div>
     );

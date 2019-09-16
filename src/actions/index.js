@@ -1,4 +1,8 @@
-import {BooksLoaded, BooksRequested} from "../actions-store";
+import {
+    BooksLoaded,
+    BooksRequested,
+    BookAddedToCart
+} from "../actions-store";
 
 const booksLoaded = (newBooks) => {
     return {
@@ -15,6 +19,11 @@ const bookFetch = (bookService, dispatch ) => () => {
         .then((data) => dispatch(booksLoaded(data)))
 };
 
+const bookAddedToCart = (bookId) => ({
+    type: BookAddedToCart,
+    payload: bookId
+});
 export {
-    bookFetch
+    bookFetch,
+    bookAddedToCart
 }

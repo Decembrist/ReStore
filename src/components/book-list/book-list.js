@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {withBSS} from '../hoc';
-import {bookFetch} from '../../actions';
+import {bookFetch, bookAddedToCart} from '../../actions';
 import {compose} from "../../utils";
 
 import './book-list.css';
@@ -16,25 +16,30 @@ class BookList extends Component {
     }
 
     render() {
-        const {books, loader} = this.props;
+        const {books, loader, bookAddedToCart} = this.props;
+
         if(loader){
             return <Loader/>
         }
+
         return (
             <ul className="book-list">
                 {books.map(book => {
-                    return <li key={book.id}><BookItem books={book}/></li>
+                    return <li key={book.id}>
+                        <BookItem
+                            bookAddedToCart={()=>bookAddedToCart(book.id)}
+                            books={book}/>
+                    </li>
                 })}
             </ul>
         );
     }
 }
 const mapStateToProps = ({books, loader}) => ({books, loader});
-const mapDispatchToProps = (dispatch, {bookstoreService}) => {
-    return {
-        bookFetch: bookFetch(bookstoreService, dispatch)
-    }
-};
+const mapDispatchToProps = (dispatch, {bookstoreService}) => ({
+    bookFetch: bookFetch(bookstoreService, dispatch),
+    bookAddedToCart: (id) => dispatch(bookAddedToCart(id))
+});
 export default compose(
     withBSS(),
     connect(mapStateToProps, mapDispatchToProps)
