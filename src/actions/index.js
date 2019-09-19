@@ -1,7 +1,9 @@
 import {
     BooksLoaded,
     BooksRequested,
-    BookAddedToCart
+    BookAddedToCart,
+    BookDeleteToCart,
+    BookUpdateToCart
 } from "../actions-store";
 
 const booksLoaded = (newBooks) => {
@@ -23,7 +25,20 @@ const bookAddedToCart = (bookId) => ({
     type: BookAddedToCart,
     payload: bookId
 });
+
+const bookDeleteToCart = (bookId) => ({
+    type: BookDeleteToCart,
+    payload: bookId
+});
+
+const bookUpdateToCart = (bookId) => ({
+    type: BookUpdateToCart,
+    payload: bookId
+});
+
 export {
     bookFetch,
-    bookAddedToCart
+    bookAddedToCart,
+    bookDeleteToCart,
+    bookUpdateToCart
 }
